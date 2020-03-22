@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-backend
+  labels:
+    app: nodejs-backend
+  namespace: default
+  annotations:
+    spotinst.io/mutate-resource: enabled
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs-backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: nodejs-backend
+    spec:
+      containers:
+        - image: tduek/nodejs-demo:latest
+          imagePullPolicy: Always
+          name: nodejs-backend
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "200m"
+            limits:
+              memory: "256Mi"
+              cpu: "400m"
