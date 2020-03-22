@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Ocean Right-Sizing local action 
         uses: ./ # Uses an action in the root directory
-        id: kubernetes-resource-mutation
+        id: local-ocean-right-sizing-mutator 
         env:
           SPOT_OCEAN_ID: ${{ secrets.OCEAN_ID }}
           SPOT_OCEAN_CONTROLLER: ${{ secrets.OCEAN_CONTROLLER }}
@@ -18,7 +18,7 @@ jobs:
           SPOT_ACCOUNT: ${{ secrets.SPOT_ACCOUNT }}
       - name: Ocean Right-Sizing remote action 
         uses: tsahiduek/ocean-right-sizing-githubaction@v0.1
-        id: kubernetes-resource-mutation
+        id: remote-ocean-right-sizing-mutator 
         env:
           SPOT_OCEAN_ID: ${{ secrets.OCEAN_ID }}
           SPOT_OCEAN_CONTROLLER: ${{ secrets.OCEAN_CONTROLLER }}
